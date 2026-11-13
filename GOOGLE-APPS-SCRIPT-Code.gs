@@ -19,7 +19,8 @@ function doPost(e) {
     }
 
     const items = (order.items || []).map(function (item) {
-      return item.name + ' × ' + item.quantity + '（A$' + Number(item.lineTotal || 0).toFixed(2) + '）';
+      const detail = item.detail ? '\n  具体内容：' + item.detail : '';
+      return item.name + ' × ' + item.quantity + '（A$' + Number(item.lineTotal || 0).toFixed(2) + '）' + detail;
     }).join('\n');
 
     const subject = '俞记黑鸭新订单 ' + order.orderNumber + ' · A$' + Number(order.pricing.total).toFixed(2);
