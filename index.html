@@ -24,7 +24,7 @@
 <body>
   <div class="shell">
     <header class="hero"><div class="hero-inner"><div class="topline"><div class="identity"><img class="logo" src="assets/logo-mascot.jpg" alt="俞记黑鸭"><div class="brand"><small>SWEET MALA DUCK</small><strong>俞记黑鸭</strong></div></div><span class="pill">武汉甜麻辣风味</span></div><div class="hero-copy"><span class="eyebrow">招牌卤味</span><h1><span class="flame">越啃越上头。</span></h1><p>慢卤入味 · 麻辣回甜 · 一口就过瘾</p></div></div></header>
-    <section class="order-notice"><button class="notice-toggle" id="noticeToggle" aria-expanded="false">✨ 查看自取与配送说明 <span>⌄</span></button><div class="notice-panel hidden" id="noticePanel"><div class="notice-grid"><div class="notice-item"><strong>📍 预约自取</strong><span>地址：1A Finch Street, Malvern East。当天现做当天售完，现货有限，建议提前预订；下单前请与商家确认。</span></div><div class="notice-item"><strong>🚚 统一配送</strong><span>每周一、周三、周五、周日10:00am统一配送，请您尽量于前一天8:00pm前完成预订。</span></div><div class="notice-item"><strong>📦 包装方式</strong><span>餐盒装或真空包装；真空包装更易储存、携带，需冷藏。</span></div><button class="notice-item" id="groupQrTrigger"><strong>💬 微信顾客群</strong><span>点击查看二维码，加入顾客群获取菜单及配送通知。</span></button></div><p class="notice-foot">配送订单商品金额 A$13 起送；1.5公里内免费，其他区域限时特惠，配送费仅 A$3。<br>有任何问题，请与商家联系。</p></div></section>
+    <section class="order-notice"><button class="notice-toggle" id="noticeToggle" aria-expanded="false">✨ 查看自���与配送说明 <span>⌄</span></button><div class="notice-panel hidden" id="noticePanel"><div class="notice-grid"><div class="notice-item"><strong>📍 预约自取</strong><span>地址：1A Finch Street, Malvern East。当天现做当天售完，现货有限，建议提前预订；下单前请与商家确认。</span></div><div class="notice-item"><strong>🚚 统一配送</strong><span>每周一、周三、周五、周日10:00am统一配送，请您尽量于前一天8:00pm前完成预订。</span></div><div class="notice-item"><strong>📦 包装方式</strong><span>餐盒装或真空包装；真空包装更易储存、携带，需冷藏。</span></div><button class="notice-item" id="groupQrTrigger"><strong>💬 微信顾客群</strong><span>点击查看二维码，加入顾客群获取菜单及配送通知。</span></button></div><p class="notice-foot">配送订单商品金额 A$13 起送；1.5公里内免费，其他区域限时特惠，配送费仅 A$3。<br>有任何问题，请与商家联系。</p></div></section>
     <section class="tools"><label class="search"><span>⌕</span><input id="search" placeholder="搜索鸭头、鸭脖、鸭翅、鸭掌、鸭胗" autocomplete="off"></label><nav class="cats"><button class="cat active">全部卤味</button></nav></section>
     <main><div class="section-head"><h2>甜麻辣卤味</h2><span>6 个选择</span></div><div class="menu" id="menu"></div><section class="combo-section"><div class="section-head"><h2>组合优惠 <small style="font-size:13px;color:var(--muted)">Combos</small></h2><span>整盒／整份任选</span></div><div class="combo-grid"><article class="combo-card"><h3>任选两份</h3><p>鸭头、鸭脖、鸭翅、鸭掌、鸭胗任选，可重复<br><span style="color:var(--gold)">优惠 A$1.00</span></p><div class="combo-price"><strong>A$26.00</strong><button data-combo="2">去选择</button></div></article><article class="combo-card recommended"><span class="badge">推荐</span><h3>任选三份</h3><p>鸭头、鸭脖、鸭翅、鸭掌、鸭胗任选，可重复<br><span style="color:var(--gold)">优惠 A$3.50</span></p><div class="combo-price"><strong>A$37.00</strong><button data-combo="3">去选择</button></div></article><article class="combo-card"><h3>任选四份</h3><p>鸭头、鸭脖、鸭翅、鸭掌、鸭胗任选，可重复<br><span style="color:var(--gold)">优惠 A$4.00</span></p><div class="combo-price"><strong>A$50.00</strong><button data-combo="4">去选择</button></div></article></div></section><div class="footer-note">菜品图片仅供参考 · 实际出品以当日为准<br>如有食物过敏，请下单前联系工作人员</div></main>
   </div>
@@ -107,8 +107,19 @@
       };
     });
     $('#deliveryNote').textContent = pickupRule;
-    $('.notice-foot').innerHTML = '配送订单商品金额 A$13 起送；1.5公里内免费，超1.5公里为常规配送，限时特惠配送费仅 A$3。<br>有任何问题，请与商家联系。';
+    $('.notice-foot').innerHTML = '配送订单金额 A$13 起送；1.5公里内免费配送；超1.5公里配送，限时特惠<span style="color:var(--gold);font-weight:900">仅 A$3</span>。';
     renderMenu();
+    document.querySelectorAll('.dish').forEach(function (card) {
+      var unit = card.querySelector('.unit');
+      if (!unit) return;
+      unit.textContent = card.querySelector('[data-id]') ? '单个／组合' : '组合';
+    });
+    var comboHeading = document.querySelector('.combo-section .section-head > span');
+    if (comboHeading) comboHeading.textContent = '整盒任选';
+    var noticeTitle = document.querySelector('.notice-item strong');
+    if (noticeTitle) noticeTitle.textContent = '📍 自取';
+    var noticeText = document.querySelector('.notice-item span');
+    if (noticeText) noticeText.innerHTML = '地址：1A Finch Street, Malvern East。<br>下单前请与商家确认是否有现货。当天现货，当天售完，建议提前一天预订。';
     document.querySelectorAll('[data-mode]').forEach(function (button) {
       if (button.dataset.mode === '1.5公里内免费配送') button.textContent = '1.5公里内 免费配送';
       if (button.dataset.mode === '常规配送') button.textContent = '常规配送 限时特惠 A$3';
