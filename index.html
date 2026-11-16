@@ -102,15 +102,15 @@
         $('#addressField').classList.toggle('hidden', !needsDelivery);
         $('#fulfilmentDateLabel').textContent = needsDelivery ? '选择配送日期' : '选择自取日期';
         $('#deliveryNote').textContent = needsDelivery ? deliveryRule : pickupRule;
-        $('#note').placeholder = needsDelivery ? '如有特殊要求，请备注（选填）' : '如自取，请备注大约取餐时间（选填）';
+        $('#note').placeholder = '（大约取餐时间）';
         if (needsDelivery) populateDeliveryDates(); else populatePickupDates();
         updateCart();
       };
     });
     $('#deliveryNote').textContent = pickupRule;
-    $('#note').placeholder = '如自取，请备注大约取餐时间（选填）';
+    $('#note').placeholder = '（大约取餐时间）';
     var noticeToggle = document.querySelector('#noticeToggle');
-    if (noticeToggle) noticeToggle.childNodes[0].nodeValue = '查看自取与配送说明 ';
+    if (noticeToggle) noticeToggle.childNodes[0].nodeValue = '★ 查看自取与配送说明 ';
     $('.notice-foot').innerHTML = '满 A$13 起送；1.5公里内免费配送；超1.5公里，限时特惠<span style="color:var(--gold);font-weight:900">仅 A$3</span>。';
     renderMenu();
     document.querySelectorAll('.dish').forEach(function (card) {
