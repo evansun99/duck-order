@@ -40,7 +40,7 @@
   <div class="toast" id="toast">已加入购物车</div>
   <script>
     window.YUJI_ORDER_ENDPOINT='https://script.google.com/macros/s/AKfycbwvWIZQ50BxmCUSmi8E2vV95plTabYAPHn5sUEKuW35O1GGDwScKfzPL9xapDMZtkIe/exec';
-    const products=[{id:'head',name:'鸭头',singlePrice:5,originalSinglePrice:5.5,boxPrice:13.5,originalBoxPrice:null,boxQty:3,boxDiscount:2.5,img:'assets/duck-head.jpg'},{id:'neck',name:'鸭脖',singlePrice:5,boxPrice:13.5,boxQty:3,boxDiscount:1.5,img:'assets/duck-neck.jpg'},{id:'wing',name:'鸭翅',singlePrice:3,boxPrice:13.5,boxQty:5,boxDiscount:1.5,img:'assets/duck-wing.png'},{id:'feet',name:'鸭掌',singlePrice:1.5,boxPrice:13.5,boxQty:10,boxDiscount:1.5,img:'assets/duck-feet.png'},{id:'gizzard',name:'鸭胗',portionPrice:13.5,portionOnly:true,img:'assets/duck-gizzard.jpg'}];
+    const products=[{id:'head',name:'鸭头',singlePrice:5,originalSinglePrice:5.5,boxPrice:13.5,originalBoxPrice:14.5,boxQty:3,boxDiscount:2.5,img:'assets/duck-head.jpg'},{id:'neck',name:'鸭脖',singlePrice:5,boxPrice:13.5,boxQty:3,boxDiscount:1.5,img:'assets/duck-neck.jpg'},{id:'wing',name:'鸭翅',singlePrice:3,boxPrice:13.5,boxQty:5,boxDiscount:1.5,img:'assets/duck-wing.png'},{id:'feet',name:'鸭掌',singlePrice:1.5,boxPrice:13.5,boxQty:10,boxDiscount:1.5,img:'assets/duck-feet.png'},{id:'gizzard',name:'鸭胗',portionPrice:13.5,portionOnly:true,img:'assets/duck-gizzard.jpg'}];
     const sampler={id:'sampler',name:'招牌组合',price:14.5,detail:'鸭头1个＋鸭脖1个＋鸭翅1个＋鸭掌2个',img:'assets/hero-duck-small.jpg'};
     const ORDER_API_ENDPOINT=window.YUJI_ORDER_ENDPOINT||'';
     const DELIVERY_MINIMUM=13;
@@ -102,11 +102,15 @@
         $('#addressField').classList.toggle('hidden', !needsDelivery);
         $('#fulfilmentDateLabel').textContent = needsDelivery ? '选择配送日期' : '选择自取日期';
         $('#deliveryNote').textContent = needsDelivery ? deliveryRule : pickupRule;
+        $('#note').placeholder = needsDelivery ? '如有特殊要求，请备注（选填）' : '如自取，请备注大约取餐时间（选填）';
         if (needsDelivery) populateDeliveryDates(); else populatePickupDates();
         updateCart();
       };
     });
     $('#deliveryNote').textContent = pickupRule;
+    $('#note').placeholder = '如自取，请备注大约取餐时间（选填）';
+    var noticeToggle = document.querySelector('#noticeToggle');
+    if (noticeToggle) noticeToggle.childNodes[0].nodeValue = '查看自取与配送说明 ';
     $('.notice-foot').innerHTML = '满 A$13 起送；1.5公里内免费配送；超1.5公里，限时特惠<span style="color:var(--gold);font-weight:900">仅 A$3</span>。';
     renderMenu();
     document.querySelectorAll('.dish').forEach(function (card) {
