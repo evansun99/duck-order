@@ -20,6 +20,40 @@
     @media(min-width:640px){.menu,.combo-grid{grid-template-columns:1fr 1fr}.dish{grid-template-columns:126px 1fr}.dish img{width:126px;height:144px}.hero{height:450px}.hero-inner{padding:28px 30px}h1{font-size:58px}.tools,main{padding-left:28px;padding-right:28px}.order-notice{margin-left:28px;margin-right:28px}.brand strong{font-size:29px}.brand small{font-size:12px}.pill{font-size:16px}}
     .price .single-was{display:block;margin-right:0}.delivery-note{font-size:13px;line-height:1.6;font-weight:600}.hero-actions{display:flex;flex-direction:column;align-items:flex-end;gap:6px}.hero-actions .lang-switch{padding:5px 10px;font-size:11px;background:rgba(23,5,3,.48)}
     .veg-options{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0 16px}.veg-option{border:1px solid var(--line);background:#180b09;color:#fff;border-radius:12px;padding:12px;text-align:left}.veg-option.active{border-color:var(--gold);background:#382015;color:var(--gold)}.veg-option small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.veg-option.active small{color:#d2a680}.refresh-indicator{position:fixed;top:10px;left:50%;z-index:70;transform:translate(-50%,-70px);padding:8px 14px;border-radius:999px;background:#ffc229;color:#2a0803;font-size:12px;font-weight:800;box-shadow:0 8px 22px rgba(0,0,0,.3);transition:transform .2s}.refresh-indicator.show{transform:translate(-50%,0)}.refresh-btn{border:1px solid rgba(255,194,41,.45);background:#281310;color:#ffe6a0;border-radius:999px;padding:8px 13px;font-size:12px;font-weight:700;white-space:nowrap}.lang-switch{border:1px solid rgba(255,194,41,.7);background:rgba(23,5,3,.72);color:#ffe9b1;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:800;white-space:nowrap}
+
+    /* Yuji menu: keep the original photography and ordering flow. */
+    body{background:#271612}
+    .shell{max-width:1060px;background:#fcfaf6;box-shadow:none}
+    .hero{height:clamp(250px,32vw,340px)}
+    .hero::before{background-image:linear-gradient(90deg,rgba(22,8,4,.72),rgba(22,8,4,.12) 76%),linear-gradient(0deg,rgba(22,8,4,.62),transparent 65%),url('assets/hero-duck-small.jpg');background-position:center 54%}
+    .hero::after{display:none}.hero-copy{padding-bottom:0}
+    .hero h1{font-size:clamp(36px,5.4vw,58px);letter-spacing:.015em;text-shadow:none}.hero .flame{color:#fff8e8;filter:none}
+    .hero p{color:#ffedda}.logo{border-radius:16px;box-shadow:none}.hero-actions .lang-switch{font-size:13px;min-height:32px}
+    .order-notice .notice-toggle{background:#fff1cf;color:#492711;border:1px solid #dbb763;box-shadow:none;border-radius:12px}
+    .notice-item span,.notice-foot{font-size:14px}
+    .tools{padding-bottom:0}.search{background:#fff;border-color:#cec4ba;color:#705f54}.search input{color:#301e18;font-size:16px}.search input::placeholder{color:#77685f}
+    .cats:has(.cat:only-child){display:none}
+    main{color:#301e18}.section-head{margin:20px 0 12px;align-items:baseline;gap:10px}.section-head h2{font-size:clamp(23px,3vw,30px);letter-spacing:.01em}.section-head>span,.section-head h2 small{color:#705f54!important;font-size:13px}
+    .menu,.combo-grid{gap:12px}.dish,.combo-card{background:#fff;border:1px solid #dfd5cb;border-radius:15px;box-shadow:none}
+    .dish{grid-template-columns:clamp(94px,28vw,144px) minmax(0,1fr);padding:8px;gap:12px}
+    .dish img{width:100%;height:100%;min-height:132px;border-radius:9px;filter:none}
+    .dish-info{padding:4px 4px 4px 0}.dish-top{align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:4px 7px}
+    .dish h3{font-size:21px;line-height:1.2}.dish .unit{font-size:12px;color:#6d5c4f;background:transparent;border:none;padding:0}
+    .dish .sale-label,.badge{background:#ffcd51;color:#412b0b;padding:3px 7px;border-radius:5px}
+    .tag,.combo-card p{font-size:14px;color:#665449;line-height:1.5}.tag{margin:6px 0}.now-price,.price,.combo-price strong{color:#73281a}
+    .price,.combo-price strong{font-family:inherit;font-variant-numeric:tabular-nums}.price small{font-size:13px}.was-price,.price .single-was{color:#77675e}
+    main .saving{background:#ffebad;color:#694400;font-size:12px;border-radius:4px;white-space:nowrap}
+    .add,.combo-price button,.cartbtn,.checkout{background:#ad311c;box-shadow:none}.add,.close{min-width:44px;min-height:44px}.combo-price button{min-height:44px}
+    .combo-card.recommended{border-color:#cb9733;background:#fff7e4;box-shadow:none}.badge{top:8px;right:8px}
+    .combo-section{margin-top:28px}.footer-note{color:#705f54;font-size:13px}
+    .cartbar{width:min(1060px,100%);background:none}.cartbtn{box-shadow:0 3px 14px #36180c35}
+    .overlay:not(.open){visibility:hidden}.field label,.payment-note,.purchase-option small,.choice button small,.delivery-note,.cartline .detail,.veg-option small{font-size:14px}
+    .field input,.field textarea,.combo-select{font-size:16px}
+    :is(button,input,select,textarea):focus-visible{outline:3px solid #df9716;outline-offset:2px}
+    @media(min-width:720px){.order-notice{margin-inline:32px}.tools,main{padding-inline:32px}.hero-inner{padding:24px 32px}.combo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:719px){.menu,.combo-grid{grid-template-columns:1fr}}
+    @media(max-width:420px){.logo{width:clamp(74px,23vw,96px);height:auto;aspect-ratio:1}.brand strong{font-size:20px}.hero-inner{padding:16px}.hero-actions .pill{padding:7px 9px}.dish{gap:9px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:0s!important;animation-duration:0s!important}}
   </style>
 </head>
 <body>
