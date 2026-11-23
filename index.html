@@ -266,13 +266,25 @@
 
   <script>
     (function(){
-      const STATUS_API_ENDPOINT='https://script.google.com/macros/s/AKfycbxEEwReETvAQz1WbztbuZP3TkdGXKAkq2Rn6zfpLb6OGF6wP_Kg7uGqeScfX59za_Sh7Q/exec';
+      var STATUS_API_ENDPOINT='https://script.google.com/macros/s/AKfycbxEEwReETvAQz1WbztbuZP3TkdGXKAkq2Rn6zfpLb6OGF6wP_Kg7uGqeScfX59za_Sh7Q/exec';
       window.YUJI_CLOSED_DATES={'2026-11-25':{date:'2026-11-25',status:'打烊',scope:'配送',message:'本日暂停配送，请选择其他配送日期'}};
-      function isEnglish(){return typeof pageLang!=='undefined'&&pageLang==='en'}
-      function showResult(content,error){const box=$('#statusLookupResult');box.classList.remove('hidden','error');if(error)box.classList.add('error');box.innerHTML=content}
-      async function lookupOrderStatus(){const order=$('#statusOrderNumber'),phone=$('#statusPhoneLast4'),button=$('#statusLookupButton'),orderNumber=order.value.trim().toUpperCase(),last4=phone.value.replace(/\D/g,'').slice(-4);order.value=orderNumber;phone.value=last4;if(!/^(YJ\d{6}|MAN\d{6})$/.test(orderNumber)||last4.length!==4){showResult(isEnglish()?'Please check the order number and the last 4 phone digits.':'请输入正确的订单号和手机号后四位。',true);return}button.disabled=true;button.textContent=isEnglish()?'Checking…':'查询中…';try{const r=await fetch(STATUS_API_ENDPOINT+'?status=1&orderNumber='+encodeURIComponent(orderNumber)+'&phoneLast4='+encodeURIComponent(last4)+'&t='+Date.now(),{cache:'no-store'}),data=await r.json();if(!data.ok||!data.found){showResult(isEnglish()?'Order not found. Please check the details or contact us.':'未找到订单，请检查信息或联系商家。',true);return}showResult('<strong>'+data.orderNumber+' · '+(data.status||'已确认')+'</strong><br>'+(isEnglish()?'Date: ':'日期：')+(data.deliveryDate||'-')+'<br>'+(isEnglish()?'Method: ':'方式：')+(data.fulfilmentMethod||'-'),false)}catch(e){showResult(isEnglish()?'Unable to check right now. Please try again later.':'暂时无法查询，请稍后再试。',true)}finally{button.disabled=false;button.textContent=isEnglish()?'Check':'查询'}}
-      async function loadSettings(){try{const r=await fetch(STATUS_API_ENDPOINT+'?settings=1&t='+Date.now(),{cache:'no-store'}),data=await r.json();if(!data.ok||!Array.isArray(data.closedDates))return;const next={};data.closedDates.forEach(x=>next[x.date]=x);window.YUJI_CLOSED_DATES=next;if(typeof mode!=='undefined'&&mode!=='自取')populateDeliveryDates()}catch(e){}}
-      $('#statusLookupButton').onclick=lookupOrderStatus;$('#statusOrderNumber').onkeydown=e=>{if(e.key==='Enter')lookupOrderStatus()};$('#statusPhoneLast4').onkeydown=e=>{if(e.key==='Enter')lookupOrderStatus()};$('#statusPhoneLast4').oninput=e=>e.target.value=e.target.value.replace(/\D/g,'').slice(0,4);loadSettings();setInterval(loadSettings,60000);
+      document.documentElement.setAttribute('data-status-script','loaded');
+      function qs(s){return document.querySelector(s)}
+      function isEnglish(){return document.documentElement.lang==='en'}
+      function showResult(content,error){var box=qs('#statusLookupResult');if(!box)return;box.classList.remove('hidden','error');if(error)box.classList.add('error');box.innerHTML=content}
+      async function lookupOrderStatus(){
+        var order=qs('#statusOrderNumber'),phone=qs('#statusPhoneLast4'),button=qs('#statusLookupButton');
+        var orderNumber=order.value.trim().toUpperCase(),last4=phone.value.replace(/\D/g,'').slice(-4);
+        order.value=orderNumber;phone.value=last4;
+        if(!/^(YJ\d{6}|MAN\d{6})$/.test(orderNumber)||last4.length!==4){showResult(isEnglish()?'Please check the order number and the last 4 phone digits.':'请输入正确的订单号和手机号后四位。',true);return}
+        button.disabled=true;button.textContent=isEnglish()?'Checking…':'查询中…';
+        try{var r=await fetch(STATUS_API_ENDPOINT+'?status=1&orderNumber='+encodeURIComponent(orderNumber)+'&phoneLast4='+encodeURIComponent(last4)+'&t='+Date.now(),{cache:'no-store'}),data=await r.json();if(!data.ok||!data.found){showResult(isEnglish()?'Order not found. Please check the details or contact us.':'未找到订单，请检查信息或联系商家。',true);return}showResult('<strong>'+data.orderNumber+' · '+(data.status||'已确认')+'</strong><br>'+(isEnglish()?'Date: ':'日期：')+(data.deliveryDate||'-')+'<br>'+(isEnglish()?'Method: ':'方式：')+(data.fulfilmentMethod||'-'),false)}
+        catch(e){showResult(isEnglish()?'Unable to check right now. Please try again later.':'暂时无法查询，请稍后再试。',true)}
+        finally{button.disabled=false;button.textContent=isEnglish()?'Check':'查询'}
+      }
+      async function loadSettings(){try{var r=await fetch(STATUS_API_ENDPOINT+'?settings=1&t='+Date.now(),{cache:'no-store'}),data=await r.json();if(!data.ok||!Array.isArray(data.closedDates))return;var next={};data.closedDates.forEach(function(x){next[x.date]=x});window.YUJI_CLOSED_DATES=next;if(typeof mode!=='undefined'&&mode!=='自取'&&typeof populateDeliveryDates==='function')populateDeliveryDates()}catch(e){}}
+      function init(){var b=qs('#statusLookupButton'),o=qs('#statusOrderNumber'),p=qs('#statusPhoneLast4');if(!b||!o||!p)return;b.addEventListener('click',lookupOrderStatus);o.addEventListener('keydown',function(e){if(e.key==='Enter')lookupOrderStatus()});p.addEventListener('keydown',function(e){if(e.key==='Enter')lookupOrderStatus()});p.addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,4)});loadSettings();setInterval(loadSettings,60000);document.documentElement.setAttribute('data-status-ready','true')}
+      if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
     })();
   </script>
 
