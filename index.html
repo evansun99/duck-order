@@ -27,10 +27,38 @@
 <style>
 .quick-card{margin:10px 16px 0}.quick-card.order-notice{margin-top:18px}.quick-card-secondary .quick-toggle{background:linear-gradient(145deg,#2b1511,#1c0c0a);border-color:rgba(255,194,41,.34);color:#fff1d0;box-shadow:0 8px 24px rgba(0,0,0,.18)}.quick-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,194,41,.6);border-radius:14px;padding:14px 15px;color:#fff4ca;font-weight:800;text-align:left;cursor:pointer}.quick-toggle .quick-icon{font-size:22px;line-height:1;color:var(--gold)}.quick-panel{margin-top:10px}.quick-card-secondary .quick-panel{padding:12px;border:1px solid rgba(255,194,41,.24);border-radius:16px;background:rgba(28,10,7,.82)}.quick-card-secondary .order-lookup{border:0;padding:2px;background:none;box-shadow:none}.tools{padding-top:6px}.order-status-card{display:grid;gap:12px}.order-status-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.order-status-head strong{font-size:15px}.order-status-badge{padding:5px 9px;border-radius:999px;background:rgba(255,194,41,.12);color:var(--gold);font-weight:800}.order-progress{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}.order-step{position:relative;text-align:center;color:#765c4f;font-size:9px}.order-step:before{content:"";position:absolute;top:7px;left:-50%;right:50%;height:2px;background:#4b3028}.order-step:first-child:before{display:none}.order-step span{position:relative;z-index:1;display:block;width:15px;height:15px;margin:0 auto 5px;border-radius:50%;background:#4b3028;border:2px solid #24100d}.order-step.done:before,.order-step.current:before{background:var(--gold)}.order-step.done span,.order-step.current span{background:var(--gold)}.order-step.current small{color:#fff1d0;font-weight:800}.order-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px}.order-meta div{padding:9px;border-radius:10px;background:rgba(18,6,5,.62)}.order-meta span{display:block;color:#987664;font-size:10px}.order-meta strong{display:block;margin-top:2px;color:#f2d6c1;font-size:12px}.order-detail{border-top:1px dashed rgba(255,194,41,.25);padding-top:10px}.order-detail h4{margin:0 0 6px;color:#fff1d0}.order-items{list-style:none;padding:0;margin:0;display:grid;gap:5px}.order-items li{display:flex;justify-content:space-between;gap:10px;color:#d9b59e}.order-items strong{color:#fff1d0;font-size:12px}.cancelled-status{color:#ffb7a9;font-weight:800}.lookup-result{font-size:12px}
 @media(max-width:520px){.quick-card{margin-left:12px;margin-right:12px}.order-meta{grid-template-columns:1fr}.order-progress small{font-size:8px}}
-</style></head>
+</style>
+<style id="campaignCountdownStyles">
+.campaign-countdown{margin:14px 16px 0;padding:15px 16px;border:1px solid rgba(255,194,41,.72);border-radius:16px;background:linear-gradient(135deg,#8f160d 0%,#cf260f 58%,#7a100a 100%);color:#fff5d6;box-shadow:0 10px 28px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between;gap:14px;overflow:hidden;position:relative}
+.campaign-countdown::after{content:"";position:absolute;width:110px;height:110px;border-radius:50%;right:-36px;top:-58px;background:rgba(255,194,41,.15);pointer-events:none}
+.campaign-countdown-copy{position:relative;z-index:1;min-width:0}
+.campaign-countdown-label{display:block;font-size:11px;letter-spacing:.12em;font-weight:800;color:#ffd66d;margin-bottom:4px}
+.campaign-countdown strong{display:block;font-size:21px;line-height:1.15;color:#fff;font-weight:900}
+.campaign-countdown small{display:block;margin-top:6px;font-size:12px;line-height:1.45;color:#ffe6b0}
+.campaign-countdown-badge{position:relative;z-index:1;flex:0 0 auto;min-width:68px;height:68px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#ffc229;color:#4a1108;border:3px solid rgba(255,255,255,.8);box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.campaign-countdown-badge b{font-size:25px;line-height:1;font-weight:950}
+.campaign-countdown-badge span{font-size:10px;font-weight:900;margin-top:3px}
+html[lang="en"] .campaign-zh{display:none}.campaign-en{display:none}html[lang="en"] .campaign-en{display:block}
+@media(max-width:520px){.campaign-countdown{margin:12px 12px 0;padding:14px}.campaign-countdown strong{font-size:19px}.campaign-countdown small{font-size:11px}.campaign-countdown-badge{min-width:62px;height:62px}.campaign-countdown-badge b{font-size:23px}}
+</style>
+</head>
 <body>
   <div class="shell">
     <header class="hero"><div class="hero-inner"><div class="topline"><div class="identity"><img class="logo" src="assets/logo-mascot.jpg" alt="俞记黑鸭"><div class="brand"><small>SWEET MALA DUCK</small><strong>俞记黑鸭</strong></div></div><div class="hero-actions"><span class="pill">武汉甜麻辣风味</span><button class="lang-switch" id="langSwitch" type="button">中 / EN</button></div></div><div class="hero-copy"><span class="eyebrow">招牌卤味</span><h1><span class="flame">越啃越上头。</span></h1><p>慢卤入味 · 麻辣回甜 · 一口就过瘾</p></div></div></header>
+    <section class="campaign-countdown" id="campaignCountdown" aria-live="polite">
+      <div class="campaign-countdown-copy campaign-zh">
+        <span class="campaign-countdown-label">限时活动倒计时</span>
+        <strong>最后 <span data-campaign-days>3</span> 天</strong>
+        <small>鸭货限时优惠 · 配送仅 A$3 · 11月29日结束</small>
+      </div>
+      <div class="campaign-countdown-copy campaign-en">
+        <span class="campaign-countdown-label">LIMITED OFFER COUNTDOWN</span>
+        <strong><span data-campaign-days>3</span> days left</strong>
+        <small>Duck specials · A$3 delivery · Ends 29 Nov</small>
+      </div>
+      <div class="campaign-countdown-badge" aria-hidden="true"><b data-campaign-days>3</b><span class="campaign-zh">天</span><span class="campaign-en">DAYS</span></div>
+    </section>
+
     <section class="order-notice quick-card"><button class="notice-toggle quick-toggle" id="noticeToggle" data-panel="noticePanel" aria-expanded="false"><span class="notice-lead"><span class="notice-marker">★</span><span>查看自取与配送说明</span></span><span class="quick-icon">＋</span></button><div class="notice-panel hidden" id="noticePanel"><div class="notice-grid"><div class="notice-item"><strong>📍 预约自取</strong><span>地址：1A Finch Street, Malvern East。当天现做当天售完，现货有限，建议提前预订；下单前请与商家确认。</span></div><div class="notice-item"><strong>🚚 统一配送</strong><span>每周一、周三、周五、周日10:00am统一配送，请您尽量于前一天8:00pm前完成预订。</span></div><div class="notice-item"><strong>📦 包装方式</strong><span>餐盒装或真空包装；真空包装更易储存、携带，需冷藏。</span></div><button class="notice-item" id="groupQrTrigger"><strong>💬 微信顾客群</strong><span>点击查看二维码，加入顾客群获取菜单及配送通知。</span></button></div><p class="notice-foot">配送订单商品金额 A$26 起送；1.5公里内免费，其他区域按距离收取配送费。<br>有任何问题，请与商家联系。</p></div></section>
     <section class="quick-card quick-card-secondary"><button class="quick-toggle" id="searchToggle" data-panel="searchPanel" aria-expanded="false"><span id="searchToggleText">⌕ 搜索商品</span><span class="quick-icon">＋</span></button><div class="quick-panel hidden" id="searchPanel"><label class="search"><span>⌕</span><input id="search" placeholder="搜索商品" autocomplete="off"></label></div></section><section class="quick-card quick-card-secondary"><button class="quick-toggle" id="statusToggle" data-panel="statusPanel" aria-expanded="false"><span id="statusToggleText">查询订单状态</span><span class="quick-icon">＋</span></button><div class="quick-panel hidden" id="statusPanel"><div class="order-lookup"><div class="lookup-copy"><strong id="statusLookupTitle">查询订单状态</strong><span id="statusLookupHint">输入订单号和手机号后四位</span></div><div class="lookup-fields"><input id="statusOrderNumber" placeholder="订单号" autocomplete="off" maxlength="9"><input id="statusPhoneLast4" placeholder="手机号后四位" inputmode="numeric" autocomplete="off" maxlength="4"><button id="statusLookupButton" type="button">查询</button></div><div id="statusLookupResult" class="lookup-result hidden" aria-live="polite"></div></div></div></section><section class="tools"><nav class="cats"><button class="cat active">全部卤味</button></nav></section>
     <main><div class="section-head"><h2>甜麻辣卤味</h2><span>7 个选择</span></div><div class="menu" id="menu"></div><section class="combo-section veg-section"><div class="section-head"><h2>素菜／拼盘</h2><span>A$10／份</span></div><article class="combo-card"><h3>素菜拼盘</h3><p>藕片、海带结、腐竹、土豆片、木耳、鹿茸菇、鱼豆腐，可单选可拼<br><span style="color:var(--gold)">一份拼盘最多选择三样</span></p><div class="combo-price"><strong>A$10.00</strong><button id="vegChoose">选择搭配</button></div></article></section><section class="combo-section"><div class="section-head"><h2>组合优惠 <small style="font-size:13px;color:var(--muted)">Combos</small></h2><span>整盒／整份任选</span></div><div class="combo-grid"><article class="combo-card"><h3>任选两份</h3><p>鸭头、大鸭脖、鸭翅、鸭掌、鸭胗任选，可重复<br><span style="color:var(--gold)">优惠 A$1.00</span></p><div class="combo-price"><strong>A$26.00</strong><button data-combo="2">去选择</button></div></article><article class="combo-card recommended"><span class="badge">推荐</span><h3>任选三份</h3><p>鸭头、大鸭脖、鸭翅、鸭掌、鸭胗任选，可重复<br><span style="color:var(--gold)">优惠 <span class="was-price">A$2.00</span> <span class="now-price">A$3.50</span></span></p><div class="combo-price"><strong>A$37.00</strong><button data-combo="3">去选择</button></div></article><article class="combo-card"><h3>任选四份</h3><p>鸭头、大鸭脖、鸭翅、鸭掌、鸭胗任选，可重复<br><span style="color:var(--gold)">优惠 <span class="was-price">A$3.00</span> <span class="now-price">A$4.00</span></span></p><div class="combo-price"><strong>A$50.00</strong><button data-combo="4">去选择</button></div></article></div></section><div class="footer-note">菜品图片仅供参考 · 实际出品以当日为准<br>如有食物过敏，请下单前联系工作人员</div></main>
@@ -324,5 +352,17 @@
     })();
   </script>
 
+
+<script id="campaignCountdownScript">
+(function(){
+  var banner=document.getElementById('campaignCountdown');
+  if(!banner)return;
+  var end=new Date('2026-11-29T23:59:59+11:00');
+  var remaining=end.getTime()-Date.now();
+  if(remaining<=0){banner.hidden=true;return;}
+  var days=Math.max(1,Math.ceil(remaining/86400000));
+  banner.querySelectorAll('[data-campaign-days]').forEach(function(el){el.textContent=days;});
+})();
+</script>
 </body>
 </html>
